@@ -146,7 +146,7 @@ def imgur_post(filepath):
     endpoint = 'https://api.imgur.com/3/upload.json'
     r = requests.post(endpoint, headers=headers, data=payload)
     j = json.loads(r.text)
-    url = j['upload']['links']['original']
+    url = j['data']['link']
     sys.stderr.write('Upload Success!    %s    %s\n' % (filepath, url))
     return url
 
