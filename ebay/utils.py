@@ -143,7 +143,7 @@ def imgur_post(filepath):
         'title': 'an upload'
     }
     headers = {"Authorization": "Client-ID %s" % imgur_key}
-    endpoint = 'https://api.imgur.com/3/upload.json'
+    endpoint = 'https://api.imgur.com/3/upload'
     r = requests.post(endpoint, headers=headers, data=payload)
     j = json.loads(r.text)
     url = j['data']['link']
