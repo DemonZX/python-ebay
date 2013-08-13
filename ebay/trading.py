@@ -220,8 +220,10 @@ def uploadSiteHostedPicture(filepath):
                               xml_declaration=True, encoding="UTF-8")
 
     response = get_response(oname, request, "UTF-8")
-
-    return urlpath
+    xml = parseString(response)
+    url = xml.getElementsByTagName("FullURL")[0].lastChild.nodeValue
+ 
+    return url
 
 
 def url_result(result):
