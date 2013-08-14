@@ -38,8 +38,8 @@ def addItem(title, description, primaryCategoryId,
 
 
     item_e = etree.SubElement(root, "Item")
-    t_e = add_e(item_e, "Title", str(title))
-    d_e = add_e(item_e, "Description", str(description))
+    t_e = add_e(item_e, "Title", title)
+    d_e = add_e(item_e, "Description", description)
     pcat = add_e(item_e, "PrimaryCategory", None)
     cid = add_e(pcat, "CategoryID", primaryCategoryId)
     add_e(item_e, "ConditionID", CID.get(condition, 'new'))
@@ -63,11 +63,7 @@ def addItem(title, description, primaryCategoryId,
 
     # default return
     returnPol_e = add_e(item_e, "ReturnPolicy", None)
-    add_e(returnPol_e, "ReturnsAcceptedOption", "ReturnsAccepted")
-    add_e(returnPol_e, "RefundOption", "MoneyBack")
-    add_e(returnPol_e, "ReturnsWithinOption", "Days_30")
-    add_e(returnPol_e, "Description", "If you are not satisfied, ship the item back for a full refund.")
-    add_e(returnPol_e, "ShippingCostPaidByOption", "Buyer")
+    add_e(returnPol_e, "ReturnsAcceptedOption", "ReturnsNotAccepted")
     # end default ret pol
     
     shipde_e = add_e(item_e, "ShippingDetails", None)
@@ -79,6 +75,12 @@ def addItem(title, description, primaryCategoryId,
         add_e(sse, "ShippingServiceAdditionalCost", "0.0")
         add_e(sse, "ShippingServicePriority", "1")
         add_e(sse, "ExpeditedService", "false")
+    else:
+        sst = add_e(shipde_e, "ShippingType", "Flat")
+        sse = add_e(shipde_e, "ShippingServiceOptions", None)
+        add_e(sse, "ShippingServicePriority", "1")
+        add_e(sse, "ShippingServiceAdditionalCost", "9.99")
+        shipde_e = add_e(item_e, "ShipToLocations", "Worldwide")
     site_e = add_e(item_e, "Site", site)
 
     #need to specify xml declaration and encoding or else will get error
@@ -222,7 +224,6 @@ def uploadSiteHostedPicture(filepath):
     response = get_response(oname, request, "UTF-8")
     xml = parseString(response)
     url = xml.getElementsByTagName("FullURL")[0].lastChild.nodeValue
- 
     return url
 
 
