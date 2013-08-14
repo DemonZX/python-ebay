@@ -78,8 +78,16 @@ def addItem(title, description, primaryCategoryId,
     else:
         sst = add_e(shipde_e, "ShippingType", "Flat")
         sse = add_e(shipde_e, "ShippingServiceOptions", None)
+        ssi = add_e(shipde_e, "InternationalShippingServiceOption", None)
         add_e(sse, "ShippingServicePriority", "1")
-        add_e(sse, "ShippingServiceAdditionalCost", "9.99")
+        add_e(sse, "ShippingService", "USPSMedia")
+        add_e(sse, "ShippingServiceCost", "9.99")
+
+        add_e(ssi, "ShippingServicePriority", "1")
+        add_e(ssi, "ShippingService", "USPSPriorityMailInternational")
+        add_e(ssi, "ShippingServiceCost", "9.99")
+        add_e(ssi, "ShipToLocation", "Worldwide")
+
         shipde_e = add_e(item_e, "ShipToLocations", "Worldwide")
     site_e = add_e(item_e, "Site", site)
 
@@ -223,6 +231,7 @@ def uploadSiteHostedPicture(filepath):
 
     response = get_response(oname, request, "UTF-8")
     xml = parseString(response)
+    import pdb;pdb.set_trace();
     url = xml.getElementsByTagName("FullURL")[0].lastChild.nodeValue
     return url
 
