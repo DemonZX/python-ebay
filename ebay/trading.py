@@ -231,7 +231,6 @@ def uploadSiteHostedPicture(filepath):
 
     response = get_response(oname, request, "UTF-8")
     xml = parseString(response)
-    import pdb;pdb.set_trace();
     url = xml.getElementsByTagName("FullURL")[0].lastChild.nodeValue
     return url
 
