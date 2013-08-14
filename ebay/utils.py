@@ -127,7 +127,7 @@ class SortOrder(object):
 def add_e(parent, key, val=None):
     child = etree.SubElement(parent, key)
     if val:
-        child.text = str(val)
+        child.text = str(val).decode('utf-8')
     return child
 
 
@@ -149,4 +149,3 @@ def imgur_post(filepath):
     url = j['data']['link']
     sys.stderr.write('Upload Success!    %s    %s\n' % (filepath, url))
     return url
-
