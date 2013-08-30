@@ -60,6 +60,7 @@ def addItem(title, description, primaryCategoryId,
         ure = add_e(picde, "PictureURL", url)
     pce = add_e(item_e, "PostalCode", postalCode)
     que = add_e(item_e, "Quantity", quantity)
+    hcounter = add_e(item_e, "HitCounter", "RetroStyle")
 
     # default return
     returnPol_e = add_e(item_e, "ReturnPolicy", None)
@@ -79,7 +80,7 @@ def addItem(title, description, primaryCategoryId,
         sst = add_e(shipde_e, "ShippingType", "Flat")
         sse = add_e(shipde_e, "ShippingServiceOptions", None)
         ssi = add_e(shipde_e, "InternationalShippingServiceOption", None)
-        add_e(sse, "ShippingServicePriority", "1")
+        add_e(sse, "ShippingServicePriority", "2")
         add_e(sse, "ShippingService", "USPSMedia")
         add_e(sse, "ShippingServiceCost", "9.99")
 
