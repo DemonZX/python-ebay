@@ -9,6 +9,7 @@ from lxml import etree
 import base64
 #import codecs
 import json
+from random import randint
 
 def get_endpoint_response(endpoint_name, operation_name, data, encoding, 
                           **headers):
@@ -132,7 +133,11 @@ def add_e(parent, key, val=None):
 
 
 def imgur_post(filepath):
-    imgur_key = get_config_store().get("keys", "imgur_key")
+    type_key = randint(1,3)
+    key_names = ['imgur_key_1',
+                'imgur_key_2',
+                'imgur_key_3']
+    imgur_key = get_config_store().get("keys", key_names[type_key])
     fobj = open(filepath, "rb")
     bimage = fobj.read()  #again, not string data, but binary data
     fobj.close()
@@ -149,3 +154,4 @@ def imgur_post(filepath):
     url = j['data']['link']
     sys.stderr.write('Upload Success!    %s    %s\n' % (filepath, url))
     return url
+
