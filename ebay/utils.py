@@ -133,7 +133,7 @@ def add_e(parent, key, val=None):
 
 
 def imgur_post(filepath):
-    type_key = randint(1,3)
+    type_key = randint(0,2)
     key_names = ['imgur_key_1',
                 'imgur_key_2',
                 'imgur_key_3']
