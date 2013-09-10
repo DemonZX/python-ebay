@@ -5,7 +5,8 @@ from utils import (get_endpoint_response, get_config_store,
         get_endpoint_response_with_file, add_e, imgur_post)
 from lxml import etree, objectify
 from xml.dom.minidom import parseString
- 
+import time
+import datetime
 
 CID = {
     'new': '1000',
@@ -42,7 +43,8 @@ def addItem(title, description, primaryCategoryId,
     d_e = add_e(item_e, "Description", description)
     pcat = add_e(item_e, "PrimaryCategory", None)
     cid = add_e(pcat, "CategoryID", primaryCategoryId)
-    add_e(item_e, "ConditionID", CID.get(condition, 'new'))
+    #add_e(item_e, "ConditionID", CID.get(condition, 'new'))
+    add_e(item_e, "ScheduleTime", (datetime.datetime.now() + datetime.timedelta(days=20)).strftime("%Y-%m-%dT00:00:00.00Z"))
     sp = add_e(item_e, "StartPrice", startPrice)
     if buyItNowPrice:
         sp = add_e(item_e, "BuyItNowPrice", buyItNowPrice)
